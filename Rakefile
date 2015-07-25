@@ -9,7 +9,7 @@ Rake::TestTask.new do |t|
 end
 
 task :parse do
-  puts "Parsing file..."
+  puts "Parsing files..."
   start = Time.now
   output = `ruby main.rb input`
   finish = Time.now

@@ -3,12 +3,14 @@
 require 'docsplit'
 
 
-filename = ARGV[0]
-file = File.new(filename, "r")
-file_path = file.gets.chomp!
-
-file_source = file_path
 file_dest = '/home/matej/develop/efind/texts'
 
-Docsplit.extract_text(file_source, :output => file_dest)
+filelist = ARGV[0]
+file = File.new(filelist, "r")
+
+File.foreach(file).with_index do |line, line_num|
+  current_file = line.chomp!
+  Docsplit.extract_text(current_file, :output => file_dest)
+end
+
 
