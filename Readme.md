@@ -2,7 +2,8 @@ Efind
 =======================
 goal find text in parsed e-books
 
-Prerequisites
+
+Pdf parser Prerequisites
 ------------------------
 install on OS:
 
@@ -11,6 +12,15 @@ yum install install poppler-utils poppler-data GraphicsMagick ghostscript tesser
 install locally:
 
 gem install docsplit
+
+MongoDB Prerequisites
+------------------------
+gem update --system
+gem install mongo
+gem install bson
+gem install bson_ext
+
+
 
 
 To run

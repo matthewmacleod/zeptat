@@ -8,6 +8,7 @@ Rake::TestTask.new do |t|
   t.verbose = true
 end
 
+# parse pdfs in file named "input"
 task :parse do
   puts "Parsing files..."
   start = Time.now
@@ -19,5 +20,12 @@ task :parse do
   puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
 end
 
+# upload files in file named "upload" to database
+#task :upload
+#end
+
+#query the database for strings in file named "queries"
 #task :find do
 #end
+
+

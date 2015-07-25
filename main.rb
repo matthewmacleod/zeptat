@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'docsplit'
+require 'mongo'
 
 
 file_dest = '/home/matej/develop/efind/texts'
