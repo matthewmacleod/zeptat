@@ -26,16 +26,24 @@ gem install json
 setup mongodb
 ------------------------
 create proper directories:
-[root@localhost ~]# mkdir /data
-[root@localhost ~]# ln -s /home/matej/data/db /data/db
-[root@localhost ~]# ll /data/
-lrwxrwxrwx. 1 root root 19 Jul  2 10:52 db -> /home/matej/data/db
-[root@localhost ~]# chown -R matej:matej /data/
-[root@localhost ~]# ll /data/
-lrwxrwxrwx. 1 matej matej 19 Jul  2 10:52 db -> /home/matej/data/db
+
+        [root@localhost ~]# mkdir /data
+
+        [root@localhost ~]# ln -s /home/matej/data/db /data/db
+
+        [root@localhost ~]# ll /data/
+
+        lrwxrwxrwx. 1 root root 19 Jul  2 10:52 db -> /home/matej/data/db
+
+        [root@localhost ~]# chown -R matej:matej /data/
+
+        [root@localhost ~]# ll /data/
+
+        lrwxrwxrwx. 1 matej matej 19 Jul  2 10:52 db -> /home/matej/data/db
 
 now start server in terminal:
-mongod
+
+        mongod
 
 
 
@@ -43,12 +51,12 @@ mongod
 To Run:
 ------------------------
 To Parse:
-Step 1.  put file paths of pdfs into file:
+Step 1.  put file paths of pdfs into file input,
 
-              input
-eg, cat input
-/home/matej/develop/test/ruby/pdfs/efficient_learning_machines.pdf
-/home/matej/ebooks/programming/cs/ai/machine_learning/Emerging Paradigms in Machine Learning.pdf
+
+             cat input
+             /home/matej/develop/test/ruby/pdfs/efficient_learning_machines.pdf
+             /home/matej/ebooks/programming/cs/ai/machine_learning/Emerging Paradigms in Machine Learning.pdf
 
 
 Step 2. then run:
@@ -64,15 +72,21 @@ To upload:
 Step 3. load files into database:
 fix file for uploads, files_to_upload
 
-eg, cat files_to_upload
-efficient_learning_machines.txt
-Emerging Paradigms in Machine Learning.txt
+eg,
+
+          cat files_to_upload
+          efficient_learning_machines.txt
+          Emerging Paradigms in Machine Learning.txt
 
 
 Now run:
+
             rake upload > out
+
 or
+
             ruby main.rb upload files_to_upload
+
 
 Step 4. query database for text:
 
