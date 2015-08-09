@@ -16,6 +16,7 @@ if ARGV[0] == "parse" then
 
   File.foreach(file).with_index do |line, line_num|
     current_file = line.chomp!
+    print "Parsing file: ", current_file, "\n"
     Docsplit.extract_text(current_file, :output => file_dest)
   end
 
@@ -81,14 +82,6 @@ if ARGV[0] == "upload" then
 
 end
 
-# clean functionality
-# usage:
-# ruby main.rb drop databases_to_drop
-# where databases_to_drop is the list of databases to drop
-#
-
-
-
 
 # query functionality
 # usage:
@@ -96,12 +89,36 @@ end
 # where query_list is the list of queries to make upon the database
 #
 if ARGV[0] == "query" then
+  q_list_name = ARGV[1]
+  file = File.open(q_list_name) or die "Unable to open #{q_list_name}"
+  queries = []
+  file.each_line do |line|
+    queries << line.chomp!
+  end
+
+  db = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'zeptat_db')
+  coll = db["ebook_collection"] # get mongodb collection
+
+  queries.each {|search_term|
+    finds = coll.find({"line": /#{search_term}/i })
+    finds.each {|document|
+      print document,"\n" #=> Yields a BSON::Document.
+    }
+    print "Total number of lines found: ", finds.count, "\n"
+  }
 
 end
 
 
-
-
+# clean functionality
+# usage:
+# ruby main.rb drop databases_to_drop
+# where databases_to_drop is the list of databases to drop
+if ARGV[0] == "clean" then
+  # temp clean db, todo move to clean
+  client = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'zeptat_db')
+  client.database.drop
+end
 
 
 

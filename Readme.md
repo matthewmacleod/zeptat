@@ -93,12 +93,25 @@ Now run:
 
             rake upload > out
 
-or
+or:
 
             ruby main.rb upload files_to_upload
 
 
 Step 4. query database for text:
+As of now database queries are not case sensitive
+
+    cat query_list
+
+    linear
+
+now type:
+
+    rake query
+
+or:
+
+    ruby main.rb query query_list
 
 
 Step 5. to clean database
