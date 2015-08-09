@@ -7,20 +7,26 @@ Pdf parser Prerequisites
 ------------------------
 install on OS:
 
-dnf install install poppler-utils poppler-data GraphicsMagick ghostscript tesseract tesseract-ocr pdftk libreoffice
-dnf install mongodb mongodb-server
+        dnf install install poppler-utils poppler-data GraphicsMagick ghostscript tesseract tesseract-ocr pdftk libreoffice
+
+        dnf install mongodb mongodb-server
 
 install locally:
 
-gem install docsplit
+            gem install docsplit
 
 MongoDB Prerequisites
 ------------------------
-gem update --system
-gem install mongo
-gem install bson
-gem install bson_ext
-gem install json
+          gem update --system
+
+          gem install mongo
+
+          gem install bson
+
+          gem install bson_ext
+
+          gem install json
+
 
 
 setup mongodb
@@ -55,7 +61,9 @@ Step 1.  put file paths of pdfs into file input,
 
 
              cat input
+
              /home/matej/develop/test/ruby/pdfs/efficient_learning_machines.pdf
+
              /home/matej/ebooks/programming/cs/ai/machine_learning/Emerging Paradigms in Machine Learning.pdf
 
 
@@ -75,7 +83,9 @@ fix file for uploads, files_to_upload
 eg,
 
           cat files_to_upload
+
           efficient_learning_machines.txt
+
           Emerging Paradigms in Machine Learning.txt
 
 
