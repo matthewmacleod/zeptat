@@ -6,6 +6,10 @@ require 'mongo'
 
 file_dest = '/home/matej/develop/zeptat/texts'
 
+# parse functionality
+# usage:
+# ruby main.rb parse input
+# where input file contains a list of pdf files to parse into text
 if ARGV[0] == "parse" then
   filelist = ARGV[1]
   file = File.new(filelist, "r")
@@ -19,11 +23,9 @@ if ARGV[0] == "parse" then
   Dir["/home/matej/develop/zeptat/texts/*txt"].each { |f|
     puts "file : " + f
     lines = []
-    fopen = File.open(f) or die "Unable to open file..."
-    fopen.each_line do |line|
-      #binding.pry
+    # use this to avoid slurping whole file into memory
+    File.foreach(f) do |line|
       current_line = line.chomp!
-      #puts "current line: " + current_line
       if current_line =~ /\w+/
         current_line.gsub!("�","")
         current_line.gsub!('',"")
@@ -31,27 +33,78 @@ if ARGV[0] == "parse" then
         lines << current_line
       end
     end
+    lines << "\n"
     File.open(f, 'w') {|fi| fi.write lines.join("\n")}
   }
-
 end
 
-
+# upload functionality
+# usage:
+# ruby main.rb upload files_to_upload
+# where files_to_upload is the list of text files to upload to database
+#
 if ARGV[0] == "upload" then
-  filelist = ARGV[1]
-  file = File.new(filelist, "r")
+  filelist_name = ARGV[1]
+  file = File.open(filelist_name) or die "Unable to open #{filelist_name}"
+  files, file_names = [],[]
+  file.each_line do |line|
+    cline = line.chomp!
+    files << cline
+    file_names << cline.gsub(".txt","")
+  end
+  print "debug ", file_names, "\n"
 
+  file_location ="/home/matej/develop/zeptat/texts"
+
+  # temp clean db, todo move to clean
+  client = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'zeptat_db')
+  client.database.drop
+
+  # fire up db..todo add check that mongod is up
   db = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'zeptat_db')
-  db.collection_names.each { |name| puts name }
-  coll = db["Ebook_Collection"] # get mongodb collection
+  coll = db["ebook_collection"] # get mongodb collection
 
-  File.foreach(file).with_index do |line, line_num|
-    current_file = line.chomp!
-    file_txt = File.open(file_dest+'/'+current_file, "rb")
-    file_string = file_txt.read
-    file_txt.close
-    doc = {"name" => current_file, "content" => file_string}
-    coll.insert(doc) # insert this document into mongodb
+  # finally, upload lines from each txt ebook
+  files.each_with_index do |f, f_index|
+    File.foreach(file_location+'/'+f).with_index do |line, index|
+      cline = line.chomp!
+      print "debugging ", index, " line ", line, "\n"
+      doc = {"title" => file_names[f_index], "line" => "line number: " + index.to_s + " " + cline}
+      coll.insert_one(doc) # insert this document into mongodb
+    end
+    # counting is redundant but want to make sure they are in database
+    print "Lines added for ", file_names[f_index], " ", coll.find({"title": /#{file_names[f_index]}/i}).count , "\n"
   end
 
+  # return some logistics
+  print "Total items in zeptat database collection: ", coll.find().count, "\n"
+
 end
+
+# clean functionality
+# usage:
+# ruby main.rb drop databases_to_drop
+# where databases_to_drop is the list of databases to drop
+#
+
+
+
+
+# query functionality
+# usage:
+# ruby main.rb query query_list
+# where query_list is the list of queries to make upon the database
+#
+if ARGV[0] == "query" then
+
+end
+
+
+
+
+
+
+
+
+
+

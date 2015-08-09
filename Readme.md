@@ -40,22 +40,45 @@ mongod
 
 
 
-To run
+To Run:
 ------------------------
+To Parse:
 Step 1.  put file paths of pdfs into file:
 
               input
+eg, cat input
+/home/matej/develop/test/ruby/pdfs/efficient_learning_machines.pdf
+/home/matej/ebooks/programming/cs/ai/machine_learning/Emerging Paradigms in Machine Learning.pdf
 
 
 Step 2. then run:
 
                rake parse
 
-todo:
+or in long form:
 
+                ruby main.rb parse input
+
+
+To upload:
 Step 3. load files into database:
+fix file for uploads, files_to_upload
+
+eg, cat files_to_upload
+efficient_learning_machines.txt
+Emerging Paradigms in Machine Learning.txt
+
+
+Now run:
+            rake upload > out
+or
+            ruby main.rb upload files_to_upload
 
 Step 4. query database for text:
+
+
+Step 5. to clean database
+
 
 
 

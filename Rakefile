@@ -21,6 +21,8 @@ task :parse do
 end
 
 # upload files in file named "files_to_upload" to database
+# might want to do this since there is a lot of output
+# rake upload > out
 task :upload do
   puts "Uploading files to database..."
   start = Time.now
@@ -32,8 +34,8 @@ task :upload do
   puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
 end
 
-#query the database for strings in file named "queries"
-#task :find do
-#end
+# find ie, query the database for strings in file named "queries"
+task :query do
+end
 
 
