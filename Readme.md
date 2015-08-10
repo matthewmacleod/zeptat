@@ -131,7 +131,8 @@ rdoc -f darkfish
 
 Todo
 ------------------------
-* edit docsplit to output bson or something that we can upload to mongodb
+* add additional query flexibility
+* clean up query output
 
 
 
