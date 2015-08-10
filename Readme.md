@@ -141,8 +141,7 @@ rdoc -f darkfish
 Todo
 ------------------------
 * add additional query flexibility
-* clean up query output
-
+* add query_count
 
 
 
