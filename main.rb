@@ -140,7 +140,7 @@ if ARGV[0] == "query_count" then
     }
 
     dcounts.each {|k,v|
-      print "Title: ", k, " Number of matches: ", v,  "\n"
+      print "Title: ", k, " Number of line matches: ", v,  "\n"
     }
   }
 

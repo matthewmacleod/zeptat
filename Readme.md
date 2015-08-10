@@ -129,22 +129,21 @@ Step 5. get counts of line matches for each title:
 
 use query file eg:
 
+      cat query_list
 
-  cat query_list
-
-  svm
+      svm
 
 
 now type:
 
-  rake query_count
+      rake query_count
 
 
 To clean database
 ------------------------
 to drop database:
 
-   rake clean
+     rake clean
 
 
 
