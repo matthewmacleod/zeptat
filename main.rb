@@ -105,7 +105,7 @@ if ARGV[0] == "query" then
   queries.each {|search_term|
     finds = coll.find({"line": /#{search_term}/i })
     finds.each {|document|
-      print "title: ", document["title"], " ", document["line"],  "\n"
+      print "title: ", document["title"], " *** ", document["line"],  "\n"
     }
     print "Total number of lines found: ", finds.count, "\n"
   }
@@ -140,7 +140,7 @@ if ARGV[0] == "query_count" then
     }
 
     dcounts.each {|k,v|
-      print "Title: ", k, " Number of line matches: ", v,  "\n"
+      print "Title: ", k, "\t  *** Number of line matches: ", v,  "\n"
     }
   }
 

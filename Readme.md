@@ -138,6 +138,15 @@ now type:
 
       rake query_count
 
+abridged example output:
+
+
+      Title: efficient_learning_machines                    *** Number of line matches: 234.0
+
+      Title: elements_of_statistical_learning_Hastie2009    *** Number of line matches: 58.0
+
+      Title: Emerging Paradigms in Machine Learning         *** Number of line matches: 152.0
+
 
 To clean database
 ------------------------
