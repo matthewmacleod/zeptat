@@ -1,6 +1,7 @@
 Zeptat (Czech for: to ask)
 =======================
-goal find text in parsed e-books
+
+Project goal is to find text in parsed e-books via database
 
 
 Pdf parser Prerequisites
@@ -9,11 +10,9 @@ install on OS:
 
         dnf install install poppler-utils poppler-data GraphicsMagick ghostscript tesseract tesseract-ocr pdftk libreoffice
 
-        dnf install mongodb mongodb-server
-
 install locally:
 
-            gem install docsplit
+          gem install docsplit
 
 MongoDB Prerequisites
 ------------------------
@@ -31,6 +30,10 @@ MongoDB Prerequisites
 
 setup mongodb
 ------------------------
+root install mongo:
+
+        dnf install mongodb mongodb-server
+
 create proper directories:
 
         [root@localhost ~]# mkdir /data
@@ -115,6 +118,8 @@ or:
 
 
 Step 5. to clean database
+
+   rake clean
 
 
 
