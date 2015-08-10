@@ -125,6 +125,20 @@ or:
 
     ruby main.rb query query_list
 
+abridged example output:
+
+      Title: elements_of_statistical_learning_Hastie2009 *** line number: 102 Path algorithm for SVM classifier
+
+      Title: elements_of_statistical_learning_Hastie2009 *** line number: 819 12.3.1 Computing the SVM for Classification . . . . .
+
+      Title: elements_of_statistical_learning_Hastie2009 *** line number: 820 12.3.2 The SVM as a Penalization Method . . . . . .
+
+      Title: elements_of_statistical_learning_Hastie2009 *** line number: 822 12.3.4 SVMs and the Curse of Dimensionality . . . .
+
+      Title: elements_of_statistical_learning_Hastie2009 *** line number: 823 12.3.5 A Path Algorithm for the SVM Classifier . . .
+
+
+
 Step 5. get counts of line matches for each title:
 
 use query file eg:
