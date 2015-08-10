@@ -112,6 +112,40 @@ if ARGV[0] == "query" then
 
 end
 
+# query_count functionality
+# usage:
+# ruby main.rb query_count query_list
+# where query_list is the list of queries to make upon the database
+# Output: the titles containing the search term and number of times it appears in document
+#
+if ARGV[0] == "query_count" then
+  q_list_name = ARGV[1]
+  file = File.open(q_list_name) or die "Unable to open #{q_list_name}"
+  queries = []
+  file.each_line do |line|
+    queries << line.chomp!
+  end
+
+  db = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'zeptat_db')
+  coll = db["ebook_collection"] # get mongodb collection
+
+  queries.each {|search_term|
+    finds = coll.find()
+    distinct_titles = finds.distinct('title')
+
+    dcounts = {}
+    distinct_titles.each {|t|
+      dfinds = coll.find({"title": /#{t}/ , "line": /#{search_term}/i })
+      dcounts[t] = dfinds.count if dfinds.count > 0
+    }
+
+    dcounts.each {|k,v|
+      print "Title: ", k, " Number of matches: ", v,  "\n"
+    }
+  }
+
+end
+
 
 # clean functionality
 # usage:

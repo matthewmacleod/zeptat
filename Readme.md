@@ -111,7 +111,7 @@ The default (ie when use rake upload) is to drop current zeptat database, use lo
 
 
 Step 4. query database for text:
-As of now database queries are *not* case sensitive, eg
+As of now database queries are *not* case sensitive, eg:
 
     cat query_list
 
@@ -125,8 +125,24 @@ or:
 
     ruby main.rb query query_list
 
+Step 5. get counts of line matches for each title:
 
-Step 5. to clean database
+use query file eg:
+
+
+  cat query_list
+
+  svm
+
+
+now type:
+
+  rake query_count
+
+
+To clean database
+------------------------
+to drop database:
 
    rake clean
 

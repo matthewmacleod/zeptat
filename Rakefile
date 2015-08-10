@@ -46,6 +46,18 @@ task :query do
   puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
 end
 
+# find ie, query the database for strings in file named "queries"
+task :query_count do
+  puts "Getting query counts in the Zeptat database..."
+  start = Time.now
+  output = `ruby main.rb query_count query_list`
+  finish = Time.now
+  diff = finish - start
+  dm = diff.divmod(60)
+  puts output
+  puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
+end
+
 task :clean do
   puts "Removing Zeptat database"
   start = Time.now
