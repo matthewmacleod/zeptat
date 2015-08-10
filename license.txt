@@ -1,6 +1,6 @@
 Zeptat is licensed under the LGPL: gnu.org/licenses/lgpl.html
 
-Copyright (c) 2015- Matthew K. MacLeod
+Copyright (c) 2015 - Matthew K. MacLeod
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
