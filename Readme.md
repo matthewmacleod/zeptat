@@ -3,12 +3,18 @@ Zeptat (Czech for: to ask)
 
 Project goal is to find text in parsed e-books via database
 
+Third-party Tools required to run Zeptat code: ruby, docsplit gem, mongo driver, mongodb
 
 Pdf parser Prerequisites
 ------------------------
+docsplit documentation:
+
+       https://github.com/documentcloud/docsplit/
+
+
 install on OS:
 
-        dnf install install poppler-utils poppler-data GraphicsMagick ghostscript tesseract tesseract-ocr pdftk libreoffice
+        dnf install poppler-utils poppler-data GraphicsMagick ghostscript tesseract libreoffice
 
 install locally:
 
@@ -34,7 +40,7 @@ root install mongo:
 
         dnf install mongodb mongodb-server
 
-create proper directories:
+create proper directory structure for mongodb:
 
         [root@localhost ~]# mkdir /data
 
@@ -94,11 +100,13 @@ eg,
 
 Now run:
 
-            rake upload > out
+            rake upload > out.txt
 
 or:
 
-            ruby main.rb upload files_to_upload
+            ruby main.rb upload files_to_upload clean_boolean
+
+where clean_boolean is either true or false, where true drops current zeptat database before uploading new files
 
 
 Step 4. query database for text:
