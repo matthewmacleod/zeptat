@@ -46,6 +46,8 @@ end
 #
 if ARGV[0] == "upload" then
   filelist_name = ARGV[1]
+  clean_database = ARGV[2]
+
   file = File.open(filelist_name) or die "Unable to open #{filelist_name}"
   files, file_names = [],[]
   file.each_line do |line|
@@ -57,9 +59,10 @@ if ARGV[0] == "upload" then
 
   file_location ="/home/matej/develop/zeptat/texts"
 
-  # temp clean db, todo move to clean
-  client = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'zeptat_db')
-  client.database.drop
+  if clean_database then
+    client = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'zeptat_db')
+    client.database.drop
+  end
 
   # fire up db..todo add check that mongod is up
   db = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'zeptat_db')

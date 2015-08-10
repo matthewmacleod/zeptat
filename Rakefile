@@ -26,7 +26,7 @@ end
 task :upload do
   puts "Uploading files to Zeptat database..."
   start = Time.now
-  output = `ruby main.rb upload files_to_upload`
+  output = `ruby main.rb upload files_to_upload true`
   finish = Time.now
   diff = finish - start
   dm = diff.divmod(60)
