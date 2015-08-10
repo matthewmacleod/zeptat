@@ -106,11 +106,12 @@ or:
 
             ruby main.rb upload files_to_upload clean_boolean
 
-where clean_boolean is either true or false, where true drops current zeptat database before uploading new files
+where clean_boolean is either true or false, where true drops current zeptat database before uploading new files.
+The default (ie when use rake upload) is to drop current zeptat database, use long form if do not want this behaviour.
 
 
 Step 4. query database for text:
-As of now database queries are not case sensitive
+As of now database queries are *not* case sensitive, eg
 
     cat query_list
 
