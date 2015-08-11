@@ -1,46 +1,93 @@
 Zeptat (Czech for: to ask)
 =======================
 
-Project goal is to find text in parsed e-books via database
+Project goals and notes
+------------------------
 
-Third-party Tools required to run Zeptat code: ruby, docsplit gem, mongo driver, mongodb
+*primary goal: is to find text in parsed e-books via database
+*secondary goal: test both MongoDB and Cassandra databases
 
-Pdf parser Prerequisites
+
+Third-party tools required to run Zeptat code:
+
+*docsplit gem
+
+Mongo implementations:
+ * Ruby,
+ * Ruby mongo driver
+ * mongodb
+
+Cassandra implementation:
+  * Python
+  * Cassandra Python driver
+
+*NB* Installation instructions are for Fedora 22
+
+
+pdf parser docsplit prerequisites
 ------------------------
 docsplit documentation:
 
-       https://github.com/documentcloud/docsplit/
+      https://github.com/documentcloud/docsplit/
 
 
 install on OS:
 
-        dnf install poppler-utils poppler-data GraphicsMagick ghostscript tesseract libreoffice
+      dnf install poppler-utils poppler-data GraphicsMagick ghostscript tesseract libreoffice
 
 install locally:
 
-          gem install docsplit
+      gem install docsplit
 
-MongoDB Prerequisites
+MongoDB driver prerequisites
 ------------------------
-          gem update --system
+      gem update --system
 
-          gem install mongo
+      gem install mongo
 
-          gem install bson
+      gem install bson
 
-          gem install bson_ext
+      gem install bson_ext
 
-          gem install json
+      gem install json
+
+
+Cassandra driver prerequisites
+------------------------
+To also allow for cassandra server usage
+
+as root:
+
+      pip install cassandra-driver
+
+      pip install lz4
+
+Must install snappy first see this link:
+
+      https://code.google.com/p/snappy/
+
+once installed, continue with python installations:
+
+      pip install python-snappy
+
+      pip install scales
+
+      pip install blist
+
+      dnf install gcc python-devel libev libev-devel
 
 
 
-setup mongodb
+Installation setup for mongodb
 ------------------------
 root install mongo:
 
         dnf install mongodb mongodb-server
 
-create proper directory structure for mongodb:
+
+To initiate MongoDB Database
+------------------------
+Create proper directory structure for mongodb:
 
         [root@localhost ~]# mkdir /data
 
@@ -56,14 +103,44 @@ create proper directory structure for mongodb:
 
         lrwxrwxrwx. 1 matej matej 19 Jul  2 10:52 db -> /home/matej/data/db
 
-now start server in terminal:
+Now start server in terminal:
 
         mongod
 
+Installation setup for Cassandra
+------------------------
+See: http://docs.datastax.com/en/cassandra/2.1/cassandra/install/installRHEL_t.html
+
+Add the DataStax Community repository to the /etc/yum.repos.d/datastax.repo:
+
+    [datastax]
+    name = DataStax Repo for Apache Cassandra
+    baseurl = http://rpm.datastax.com/community
+    enabled = 1
+    gpgcheck = 0
+
+Install the packages:
+
+      dnf install dsc21
+
+      dnf install cassandra21-tools
+
+To initiate Cassandra Database
+------------------------
+
+check to make sure these directories exist
+
+* /var/log/cassandra
+* /var/lib/cassandra
+
+fix permission so can write to the above directories and
+start cassandra in separate terminal:
+
+      cassandra -f
 
 
 
-To Run:
+To run Zeptat
 ------------------------
 To Parse:
 Step 1.  put file paths of pdfs into file input,
@@ -180,8 +257,8 @@ rdoc -f darkfish
 
 Todo
 ------------------------
+* add cassandra support
 * add additional query flexibility
-* add query_count
 
 
 
