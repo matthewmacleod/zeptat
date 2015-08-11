@@ -4,7 +4,7 @@ Zeptat (Czech for: to ask)
 Project goals and notes
 ------------------------
 
- * primary goal: is to find text in parsed e-books via database
+ * primary goal: to find text in parsed e-books via database
  * secondary goal: test both MongoDB and Cassandra databases
 
 
