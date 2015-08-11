@@ -4,13 +4,13 @@ Zeptat (Czech for: to ask)
 Project goals and notes
 ------------------------
 
-*primary goal: is to find text in parsed e-books via database
-*secondary goal: test both MongoDB and Cassandra databases
+ * primary goal: is to find text in parsed e-books via database
+ * secondary goal: test both MongoDB and Cassandra databases
 
 
 Third-party tools required to run Zeptat code:
 
-*docsplit gem
+ * docsplit gem
 
 Mongo implementations:
  * Ruby,
