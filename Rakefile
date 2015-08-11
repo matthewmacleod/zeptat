@@ -38,7 +38,7 @@ end
 task :query do
   puts "Quering the Zeptat database..."
   start = Time.now
-  output = `ruby main.rb query query_list | grep -v ^D`
+  output = `ruby main.rb query query_list true | grep -v ^D`
   finish = Time.now
   diff = finish - start
   dm = diff.divmod(60)

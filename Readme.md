@@ -123,7 +123,9 @@ now type:
 
 or:
 
-    ruby main.rb query query_list
+    ruby main.rb query query_list abridge_titles_boolean
+
+where abridge_titles_boolean shortens titles if true
 
 abridged example output:
 

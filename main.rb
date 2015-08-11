@@ -93,6 +93,7 @@ end
 #
 if ARGV[0] == "query" then
   q_list_name = ARGV[1]
+  print_abridged_titles = ARGV[2]
   file = File.open(q_list_name) or die "Unable to open #{q_list_name}"
   queries = []
   file.each_line do |line|
@@ -105,7 +106,11 @@ if ARGV[0] == "query" then
   queries.each {|search_term|
     finds = coll.find({"line": /#{search_term}/i })
     finds.each {|document|
-      print "Title: ", document["title"], " *** ", document["line"],  "\n"
+      if print_abridged_titles then
+        print "Title: ", document["title"][0..25] + "...", " *** ", document["line"],  "\n"
+      else
+        print "Title: ", document["title"], " *** ", document["line"],  "\n"
+      end
     }
     print "Total number of lines found: ", finds.count, "\n"
   }
