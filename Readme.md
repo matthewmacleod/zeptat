@@ -146,7 +146,7 @@ Installation setup for PostgreSQL
 
 as root:
 
-      dnf install postgresql postgresql-server postgresql-contrib postgresql-libs
+      dnf install postgresql postgresql-server postgresql-contrib postgresql-libs postgres-devel
 
 start server at boot:
 
@@ -172,6 +172,11 @@ switch to default user:
 
       psql
 
+Driver SQL tool for Postgres and Python
+------------------------
+as root:
+
+      pip install sqlalchemy
 
 
 
