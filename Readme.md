@@ -141,6 +141,39 @@ start cassandra in separate terminal:
 
       cassandra -f
 
+Installation setup for PostgreSQL
+------------------------
+
+as root:
+
+      dnf install postgresql postgresql-server postgresql-contrib postgresql-libs
+
+start server at boot:
+
+      systemctl enable postgresql
+
+initialize postgres:
+
+      [root@localhost ~]# postgresql-setup --initdb
+
+should see this:
+
+       * Initializing database in '/var/lib/pgsql/data'
+
+       * Initialized, logs are in /var/lib/pgsql/initdb_postgresql.log
+
+start postgres:
+
+      systemctl start postgresql
+
+switch to default user:
+
+      su – postgres
+
+      psql
+
+
+
 
 
 To run Zeptat with MongoDB
