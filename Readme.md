@@ -261,6 +261,7 @@ rdoc -f darkfish
 Todo
 ------------------------
 * add cassandra support
+* add postgres
 * add additional query flexibility
 
 
