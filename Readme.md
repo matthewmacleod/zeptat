@@ -5,7 +5,10 @@ Project goals and notes
 ------------------------
 
  * primary goal: to find text in parsed e-books via database
- * secondary goal: test both MongoDB and Cassandra databases
+ * secondary goal: test various databases:
+    * MongoDB
+    * Cassandra
+    * PostgreSQL
 
 
 Third-party tools required to run Zeptat code:
