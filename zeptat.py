@@ -1,4 +1,5 @@
 from cassandra.cluster import Cluster
+import sys
 
 class Zeptat(object):
     cluster = None
@@ -15,6 +16,7 @@ class Zeptat(object):
         self.cluster.shutdown()
 
     def create_schema(self):
+        ''' primary key is title since want to keep lines local with respect to each ebook '''
         self.session.execute("CREATE KEYSPACE IF NOT EXISTS zeptat "
                              "WITH REPLICATION = { 'class': 'SimpleStrategy', "
                              "'replication_factor': 1 };")
@@ -29,16 +31,37 @@ class Zeptat(object):
                 with open('texts/'+text.rstrip()) as t:
                      for index, text_line in enumerate(t):
                          # print text_line.rstrip(), " line ", index
-                         txt_to_insert = "INSERT INTO zeptat.ebooks (title, line, line_content) VALUES ('{0}', {1}, '{2}');".format(text.rstrip(), index, text_line.rstrip())
-                         self.session.execute(txt_to_insert)
+                         cql_to_insert = "INSERT INTO zeptat.ebooks (title, line, line_content) VALUES ('{0}', {1}, '{2}');".format(text.rstrip(), index, text_line.rstrip())
+                         self.session.execute(cql_to_insert)
+
+    def query(self, desired_title, search_term):
+        cql_to_insert ="SELECT * FROM zeptat.ebooks WHERE title = '{0}';".format(desired_title)
+        results = self.session.execute(cql_to_insert)
+        for r in results:
+            if search_term in r.line_content:
+                try:
+                    print "Title: ", r.title[:25]+"...", " *** line: ", r.line, " *** content:  ", r.line_content
+                except:
+                    print "unicode error"
 
 
 
 if __name__ == '__main__':
   zeptat = Zeptat()
   zeptat.connect(["127.0.0.1"])
-  zeptat.create_schema()
-  zeptat.load_data()
+
+  # upload files in files_to_upload to Cassandra database
+  if sys.argv[1] == 'upload':
+      zeptat.create_schema()
+      zeptat.load_data()
+
+  # full text search on uploaded files for search terms found in query_list file
+  if sys.argv[1] == 'query':
+      with open('files_to_upload') as f:
+          for text in f:
+              with open('query_list') as ql:
+                  for q in ql:
+                     zeptat.query(text.rstrip(),q.rstrip())
 
 
 

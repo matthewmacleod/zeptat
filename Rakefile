@@ -60,7 +60,7 @@ task :query_count do
   puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
 end
 
-task :clean do
+task :drop do
   puts "Removing Zeptat Mongo database"
   start = Time.now
   output = `ruby main.rb clean`
@@ -72,13 +72,26 @@ task :clean do
 end
 
 # Cassandra testing
+
 # upload files in file named "files_to_upload" to database
-# might want to do this since there is a lot of output
-# rake upload > out
+# rake upload_cassandra > out
 task :upload_cassandra do
   puts "Uploading files to Zeptat Cassandra database..."
   start = Time.now
-  output = `python zeptat.py`
+  output = `python zeptat.py upload`
+  finish = Time.now
+  diff = finish - start
+  dm = diff.divmod(60)
+  puts output
+  puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
+end
+
+# query uploaded files from file named "files_to_upload" to database
+# query term is based on those in query_list file
+task :query_cassandra do
+  puts "Searching Zeptat Cassandra database..."
+  start = Time.now
+  output = `python zeptat.py query`
   finish = Time.now
   diff = finish - start
   dm = diff.divmod(60)

@@ -246,11 +246,21 @@ abridged example output:
 
 To clean database
 ------------------------
-to drop database:
+to drop Mongo database:
 
-     rake clean
+     rake drop
 
 
+
+To run Zeptat with MongoDB
+------------------------
+To upload files in files_to_upload run:
+
+      rake upload_cassandra
+
+To query terms in file query_list run:
+
+      rake query_cassandra
 
 
 
