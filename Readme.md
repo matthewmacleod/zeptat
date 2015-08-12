@@ -143,7 +143,7 @@ start cassandra in separate terminal:
 
 
 
-To run Zeptat with MongoDB implementation
+To run Zeptat with MongoDB
 ------------------------
 To Parse:
 Step 1.  put file paths of pdfs into file input,
