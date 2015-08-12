@@ -14,13 +14,25 @@ class Zeptat(object):
     def close(self):
         self.cluster.shutdown()
 
+    def create_schema(self):
+        self.session.execute("CREATE KEYSPACE IF NOT EXISTS zeptat "
+                             "WITH REPLICATION = { 'class': 'SimpleStrategy', "
+                             "'replication_factor': 1 };")
+        self.session.execute("CREATE TABLE IF NOT EXISTS "
+                             "zeptat.ebooks (ebook_id UUID, "
+                             "title TEXT, line INT, "
+                             "line_content TEXT, "
+                             "PRIMARY KEY(ebook_id, line));")
+
+
 
 if __name__ == '__main__':
   zeptat = Zeptat()
   zeptat.connect(["127.0.0.1"])
   zeptat.create_schema()
-  zeptat.load_data()
-  zeptat.print_results()
+
+
+
   zeptat.close()
 
 
