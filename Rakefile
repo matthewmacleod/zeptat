@@ -20,6 +20,8 @@ task :parse do
   puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
 end
 
+# MongoDB testing
+
 # upload files in file named "files_to_upload" to database
 # might want to do this since there is a lot of output
 # rake upload > out
@@ -68,4 +70,11 @@ task :clean do
   puts output
   puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
 end
+
+# Cassandra testing
+
+
+
+# PostgreSQL testing
+
 
