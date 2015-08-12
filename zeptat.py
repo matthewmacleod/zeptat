@@ -19,10 +19,9 @@ class Zeptat(object):
                              "WITH REPLICATION = { 'class': 'SimpleStrategy', "
                              "'replication_factor': 1 };")
         self.session.execute("CREATE TABLE IF NOT EXISTS "
-                             "zeptat.ebooks (ebook_id UUID, "
-                             "title TEXT, line INT, "
-                             "line_content TEXT, "
-                             "PRIMARY KEY(ebook_id, line));")
+                             "zeptat.ebooks (title TEXT, "
+                             "line INT, line_content TEXT, "
+                             "PRIMARY KEY(title, line));")
 
 
 
