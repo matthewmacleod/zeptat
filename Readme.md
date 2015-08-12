@@ -252,7 +252,7 @@ to drop Mongo database:
 
 
 
-To run Zeptat with MongoDB
+To run Zeptat with Cassandra
 ------------------------
 To upload files in files_to_upload run:
 
