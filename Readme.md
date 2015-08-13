@@ -172,11 +172,12 @@ switch to default user:
 
       psql
 
-Driver SQL tool for Postgres and Python
+Drivers for SQL Postgres and Python
 ------------------------
 as root:
 
-      pip install sqlalchemy
+      pip install psycopg2
+
 
 
 
