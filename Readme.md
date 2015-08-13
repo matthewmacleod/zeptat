@@ -303,6 +303,18 @@ To query terms in file query_list run:
 
 
 
+To run Zeptat with PostgreSQL
+------------------------
+To upload files in files_to_upload run:
+
+      rake upload_postgres
+
+To query terms in file query_list run:
+
+      rake query_postgres
+
+
+
 To document
 ------------------------
 rdoc -f darkfish
