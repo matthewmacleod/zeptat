@@ -2,10 +2,12 @@ from cassandra.cluster import Cluster
 import sys
 
 class Zeptat(object):
+    """ Simple class for interacting with cassandra database """
     cluster = None
     session = None
 
     def connect(self, host):
+        """ connect with host, use ["127.0.0.1"] for localhost, host must be in list format"""
         self.cluster = Cluster(host)
         self.session = self.cluster.connect()
         print "Cluster: %s" % self.cluster.metadata.cluster_name
@@ -16,7 +18,7 @@ class Zeptat(object):
         self.cluster.shutdown()
 
     def create_schema(self):
-        ''' primary key is title since want to keep lines local with respect to each ebook '''
+        """ Creates Schema, note primary key is title since want to keep lines local with respect to each ebook """
         self.session.execute("CREATE KEYSPACE IF NOT EXISTS zeptat "
                              "WITH REPLICATION = { 'class': 'SimpleStrategy', "
                              "'replication_factor': 1 };")
@@ -26,6 +28,7 @@ class Zeptat(object):
                              "PRIMARY KEY(title, line));")
 
     def load_data(self):
+        """ load data from file files_to_upload, where full path is given for each file """
         with open('files_to_upload') as f:
             for text in f:
                 with open('texts/'+text.rstrip()) as t:
@@ -35,6 +38,7 @@ class Zeptat(object):
                          self.session.execute(cql_to_insert)
 
     def query(self, desired_title, search_term):
+        """ query substring term in desired title """
         cql_to_insert ="SELECT * FROM zeptat.ebooks WHERE title = '{0}';".format(desired_title)
         results = self.session.execute(cql_to_insert)
         for r in results:
