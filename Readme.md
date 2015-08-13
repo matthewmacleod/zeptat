@@ -13,16 +13,16 @@ Project goals and notes
 
 Third-party tools required to run Zeptat code:
 
- * docsplit gem
+  * docsplit gem
 
 Mongo implementations:
- * Ruby,
- * Ruby mongo driver
- * mongodb
+  * Ruby mongo driver
 
 Cassandra implementation:
-  * Python
   * Cassandra Python driver
+
+PostgreSQL implementation:
+  * psycopg2 driver
 
 *NB* Installation instructions are for Fedora 22
 
