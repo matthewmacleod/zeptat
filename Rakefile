@@ -29,7 +29,7 @@ end
 task :upload do
   puts "Uploading files to Zeptat Mongo database..."
   start = Time.now
-  output = `python lib/mongo_zeptat.py upload`
+  output = `python3 lib/mongo_zeptat.py upload`
   finish = Time.now
   diff = finish - start
   dm = diff.divmod(60)
@@ -42,7 +42,7 @@ end
 task :query do
   puts "Searching files in Zeptat Mongo database..."
   start = Time.now
-  output = `python lib/mongo_zeptat.py query`
+  output = `python3 lib/mongo_zeptat.py query`
   finish = Time.now
   diff = finish - start
   dm = diff.divmod(60)

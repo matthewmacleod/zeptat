@@ -45,7 +45,7 @@ install locally:
 MongoDB driver prerequisites
 ------------------------
 
-      pip install pymongo
+      python3 -m pip install pymongo
 
 
 Cassandra driver prerequisites

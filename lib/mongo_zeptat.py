@@ -13,18 +13,15 @@ class Mongo_Zeptat(object):
     coll_name = 'ebooks'
 
     def init_database(self):
-        print "Initializing database..."
-        try:
-            self.client = MongoClient('localhost', 27017)
-            self.db = self.client[self.db_name]
-            self.coll = self.db[self.coll_name]
-            print "Initialized database."
-        except pymongo.errors.ConnectionFailure, e:
-            print "Could not connect to MongoDB: %s" % e
+        print("Initializing database...")
+        self.client = MongoClient('localhost', 27017)
+        self.db = self.client[self.db_name]
+        self.coll = self.db[self.coll_name]
+        print("Initialized database.")
 
     def load_data(self):
         """ Loads data from files_to_upload, right now drop previous collection """
-        print "Loading files to database..."
+        print("Loading files to database...")
         self.client[self.db_name].drop_collection(self.coll_name)
         with open('files_to_upload') as f:
             for text in f:
@@ -38,19 +35,19 @@ class Mongo_Zeptat(object):
                     self.coll.insert_one(doc)
 
     def query(self, search_term):
-        print "Searching Mongo database for " + search_term
+        print("Searching Mongo database for " + search_term)
         with open('files_to_upload') as f:
             for text in f:
-                print "searching text: ", text.rstrip()
+                print("searching text: ", text.rstrip())
                 for edoc in self.coll.find({"title": text.rstrip() }):
                     elines = edoc["lines"]
                     for line in elines:
                         if search_term in line[1]:
-                                print "Title: ", text.rstrip()[:25]+"...", " *** ", line
+                                print("Title: ", text.rstrip()[:25]+"...", " *** ", line)
 
 
     def query_count(self, search_term):
-        print "Searching Mongo database for " + search_term
+        print("Searching Mongo database for " + search_term)
         with open('files_to_upload') as f:
             for text in f:
                 counts = 0
@@ -60,12 +57,12 @@ class Mongo_Zeptat(object):
                         if search_term in line[1]:
                             counts += 1
                 if counts > 0:
-                        print "Title: ", text.rstrip()[:25]+"..." , " *** Number of line matches: ",  counts
+                        print("Title: ", text.rstrip()[:25]+"..." , " *** Number of line matches: ",  counts)
 
 
     def print_titles(self):
         for doc in self.coll.find():
-            print doc
+            print(doc)
 
     def drop_collection(self):
         self.client[self.db_name].drop_collection(self.coll_name)
