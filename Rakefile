@@ -21,64 +21,12 @@ task :parse do
   puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
 end
 
-# MongoDB testing
-
-# upload files in file named "files_to_upload" to database
-# might want to do this since there is a lot of output
-# rake upload > out
-task :upload do
-  puts "Uploading files to Zeptat Mongo database..."
-  start = Time.now
-  output = `ruby main.rb upload files_to_upload true`
-  finish = Time.now
-  diff = finish - start
-  dm = diff.divmod(60)
-  puts output
-  puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
-end
-
-# find ie, query the database for strings in file named "queries"
-# rake query
-task :query do
-  puts "Quering the Zeptat Mongo database..."
-  start = Time.now
-  output = `ruby main.rb query query_list true | grep -v ^D`
-  finish = Time.now
-  diff = finish - start
-  dm = diff.divmod(60)
-  puts output
-  puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
-end
-
-# find ie, query the database for strings in file named "queries"
-# rake query_count
-task :query_count do
-  puts "Getting query counts in the Zeptat Mongo database..."
-  start = Time.now
-  output = `ruby main.rb query_count query_list | grep -v ^D`
-  finish = Time.now
-  diff = finish - start
-  dm = diff.divmod(60)
-  puts output
-  puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
-end
-
-task :drop do
-  puts "Removing Zeptat Mongo database"
-  start = Time.now
-  output = `ruby main.rb clean`
-  finish = Time.now
-  diff = finish - start
-  dm = diff.divmod(60)
-  puts output
-  puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
-end
 
 ### Mongo testing ###
 
 # upload files in file named "files_to_upload" to database
 # rake upload_mongo
-task :upload_mongo do
+task :upload do
   puts "Uploading files to Zeptat Mongo database..."
   start = Time.now
   output = `python lib/mongo_zeptat.py upload`
@@ -89,7 +37,31 @@ task :upload_mongo do
   puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
 end
 
+# upload files in file named "files_to_upload" to database
+# rake query_mongo
+task :query do
+  puts "Searching files in Zeptat Mongo database..."
+  start = Time.now
+  output = `python lib/mongo_zeptat.py query`
+  finish = Time.now
+  diff = finish - start
+  dm = diff.divmod(60)
+  puts output
+  puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
+end
 
+# upload files in file named "files_to_upload" to database
+# rake query_mongo
+task :query_count do
+  puts "Searching files in Zeptat Mongo database..."
+  start = Time.now
+  output = `python lib/mongo_zeptat.py query_count`
+  finish = Time.now
+  diff = finish - start
+  dm = diff.divmod(60)
+  puts output
+  puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
+end
 
 
 

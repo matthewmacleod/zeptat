@@ -16,7 +16,7 @@ Third-party tools required to run Zeptat code:
   * docsplit gem
 
 Mongo implementations:
-  * Ruby mongo driver
+  * Pymongo driver
 
 Cassandra implementation:
   * Cassandra Python driver
@@ -219,14 +219,8 @@ eg,
 
 Now run:
 
-            rake upload > out.txt
+            rake upload
 
-or:
-
-            ruby main.rb upload files_to_upload clean_boolean
-
-where clean_boolean is either true or false, where true drops current zeptat database before uploading new files.
-The default (ie when use rake upload) is to drop current zeptat database, use long form if do not want this behaviour.
 
 
 Step 4. query database for text:
@@ -242,9 +236,7 @@ now type:
 
 or:
 
-    ruby main.rb query query_list abridge_titles_boolean
 
-where abridge_titles_boolean shortens titles if true
 
 abridged example output:
 
@@ -257,7 +249,6 @@ abridged example output:
       Title: elements_of_statistical_learning_Hastie2009 *** line number: 822 12.3.4 SVMs and the Curse of Dimensionality . . . .
 
       Title: elements_of_statistical_learning_Hastie2009 *** line number: 823 12.3.5 A Path Algorithm for the SVM Classifier . . .
-
 
 
 Step 5. get counts of line matches for each title:
@@ -321,7 +312,6 @@ rdoc -f darkfish
 
 Todo
 ------------------------
-* add postgres
 * add additional mongo query flexibility
 
 
