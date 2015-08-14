@@ -70,6 +70,8 @@ class Mongo_Zeptat(object):
     def drop_database(self):
         self.client.drop_database(self.db_name)
 
+    def close(self):
+        self.client.close()
 
 
 if __name__ == '__main__':
@@ -90,4 +92,6 @@ if __name__ == '__main__':
 
     if sys.argv[1] == 'drop':
         zeptat.drop_collection()
+
+    zeptat.close()
 
