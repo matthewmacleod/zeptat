@@ -201,7 +201,7 @@ Step 2. then run:
 
 or in long form:
 
-                ruby main.rb parse input
+                ruby lib/parse.rb input
 
 
 To upload:
