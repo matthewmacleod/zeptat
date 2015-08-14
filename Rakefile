@@ -13,7 +13,7 @@ end
 task :parse do
   puts "Parsing files for Zeptat database..."
   start = Time.now
-  output = `ruby main.rb parse input`
+  output = `ruby lib/parse.rb input`
   finish = Time.now
   diff = finish - start
   dm = diff.divmod(60)
@@ -81,7 +81,7 @@ end
 task :upload_cassandra do
   puts "Uploading files to Zeptat Cassandra database..."
   start = Time.now
-  output = `python zeptat.py upload`
+  output = `python lib/cassandra_zeptat.py upload`
   finish = Time.now
   diff = finish - start
   dm = diff.divmod(60)
@@ -94,7 +94,7 @@ end
 task :query_cassandra do
   puts "Searching Zeptat Cassandra database..."
   start = Time.now
-  output = `python zeptat.py query`
+  output = `python lib/cassandra_zeptat.py query`
   finish = Time.now
   diff = finish - start
   dm = diff.divmod(60)
@@ -110,7 +110,7 @@ end
 task :upload_postgres do
   puts "Uploading files to Zeptat PostgreSQL database..."
   start = Time.now
-  output = `python post_zeptat.py upload`
+  output = `python lib/postgres_zeptat.py upload`
   finish = Time.now
   diff = finish - start
   dm = diff.divmod(60)
@@ -124,7 +124,7 @@ end
 task :query_postgres do
   puts "Searching Zeptat PostgreSQL database..."
   start = Time.now
-  output = `python post_zeptat.py query`
+  output = `python lib/postgres_zeptat.py query`
   finish = Time.now
   diff = finish - start
   dm = diff.divmod(60)

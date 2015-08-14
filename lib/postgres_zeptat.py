@@ -1,7 +1,7 @@
 import psycopg2
 import sys
 
-class Post_Zeptat(object):
+class Postgres_Zeptat(object):
     """ Simple class to interact with PostgreSQL server """
     con = None
     cur = None
@@ -87,7 +87,7 @@ class Post_Zeptat(object):
 
 
 if __name__ == '__main__':
-  zeptat = Post_Zeptat()
+  zeptat = Postgres_Zeptat()
   zeptat.version()
 
   if sys.argv[1] == 'upload':

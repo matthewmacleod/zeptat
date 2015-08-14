@@ -1,7 +1,7 @@
 from cassandra.cluster import Cluster
 import sys
 
-class Zeptat(object):
+class Cassandra_Zeptat(object):
     """ Simple class for interacting with cassandra database """
     cluster = None
     session = None
@@ -51,7 +51,7 @@ class Zeptat(object):
 
 
 if __name__ == '__main__':
-  zeptat = Zeptat()
+  zeptat = Cassandra_Zeptat()
   zeptat.connect(["127.0.0.1"])
 
   # upload files in files_to_upload to Cassandra database
