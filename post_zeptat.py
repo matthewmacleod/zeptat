@@ -1,7 +1,7 @@
 import psycopg2
 import sys
 
-class Zeptat(object):
+class Post_Zeptat(object):
     """ Simple class to interact with PostgreSQL server """
     con = None
     cur = None
@@ -28,24 +28,33 @@ class Zeptat(object):
             print 'Version error %s' % e
             sys.exit(1)
 
+
     def create_table(self):
         """ create zeptat postgres schema, note will drop table if exists """
         try:
             print "Creating table..."
             sql = "DROP TABLE IF EXISTS {0}".format(self.table_name)
             self.cur.execute(sql)
-            sql_table = "CREATE TABLE {0} (title TEXT PRIMARY KEY, line INT, line_content TEXT);".format(self.table_name)
+            sql_table = "CREATE TABLE {0} (id INTEGER PRIMARY KEY, title TEXT, line INT, line_content TEXT);".format(self.table_name)
             self.cur.execute(sql_table)
             self.con.commit()
 
         except psycopg2.DatabaseError, e:
             print 'Create table error %s' % e
 
-    def load_data(self, ebook_data):
+
+    def load_data(self):
         """ load data expects the data to upload in form of a tuple of tuples """
         try:
-            inserts = "INSERT INTO {0} (title,line,line_content) Values (%s, %s, %s)".format(self.table_name)
-            self.cur.executemany(insters, ebook_data)
+            with open('files_to_upload') as f:
+                i = 0
+                for text in f:
+                    with open('texts/'+text.rstrip()) as t:
+                        for index, text_line in enumerate(t):
+                            sql_insert = "INSERT INTO {0} (id, title, line, line_content) Values ({1}, '{2}', {3}, '{4}')".format(self.table_name, i, text.rstrip(), index, text_line.rstrip())
+                            self.cur.execute(sql_insert)
+                            i += 1
+
             self.con.commit()
 
         except psycopg2.DatabaseError, e:
@@ -54,6 +63,7 @@ class Zeptat(object):
 
             print 'Load data error %s' % e
 
+
     def query(self, search_term):
         print "Searching for text: {0} ...".format(search_term)
         try:
@@ -61,12 +71,11 @@ class Zeptat(object):
             self.cur.execute(sql_query)
             rows = self.cur.fetchall()
             for row in rows:
-                if search_term in row[2]:
-                    print row[0], row[1], row[2]
+                if search_term in row[3]:
+                    print row[1][:25] + "...", row[2], row[3]
 
         except psycopg2.DatabaseError, e:
             print 'Query error %s' % e
-
 
 
     def close(self):
@@ -78,14 +87,17 @@ class Zeptat(object):
 
 
 if __name__ == '__main__':
-  zeptat = Zeptat()
+  zeptat = Post_Zeptat()
   zeptat.version()
 
   if sys.argv[1] == 'upload':
       zeptat.create_table()
+      zeptat.load_data()
 
   if sys.argv[1] == 'query':
-      zeptat.query('SVM')
+      with open('query_list') as ql:
+          for q in ql:
+              zeptat.query(q.rstrip())
 
 
 
