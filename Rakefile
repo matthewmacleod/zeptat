@@ -74,6 +74,26 @@ task :drop do
   puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
 end
 
+### Mongo testing ###
+
+# upload files in file named "files_to_upload" to database
+# rake upload_mongo
+task :upload_mongo do
+  puts "Uploading files to Zeptat Mongo database..."
+  start = Time.now
+  output = `python lib/mongo_zeptat.py upload`
+  finish = Time.now
+  diff = finish - start
+  dm = diff.divmod(60)
+  puts output
+  puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
+end
+
+
+
+
+
+
 ### Cassandra testing ###
 
 # upload files in file named "files_to_upload" to database
