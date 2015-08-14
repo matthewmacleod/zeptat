@@ -43,7 +43,7 @@ class Mongo_Zeptat(object):
                     elines = edoc["lines"]
                     for line in elines:
                         if search_term in line[1]:
-                                print("Title: ", text.rstrip()[:25]+"...", " *** ", line)
+                                print("Title: ", text.rstrip()[:25]+"...", " *** ", line[0], "  ", line[1])
 
 
     def query_count(self, search_term):
