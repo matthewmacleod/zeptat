@@ -55,7 +55,7 @@ end
 task :query_count do
   puts "Searching files in Zeptat Mongo database..."
   start = Time.now
-  output = `python lib/mongo_zeptat.py query_count`
+  output = `python3 lib/mongo_zeptat.py query_count`
   finish = Time.now
   diff = finish - start
   dm = diff.divmod(60)
