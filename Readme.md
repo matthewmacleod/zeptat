@@ -44,15 +44,8 @@ install locally:
 
 MongoDB driver prerequisites
 ------------------------
-      gem update --system
 
-      gem install mongo
-
-      gem install bson
-
-      gem install bson_ext
-
-      gem install json
+      pip install pymongo
 
 
 Cassandra driver prerequisites
