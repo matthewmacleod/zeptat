@@ -305,6 +305,7 @@ rdoc -f darkfish
 
 Todo
 ------------------------
+* clean up print out
 * add additional mongo query flexibility
 
 
