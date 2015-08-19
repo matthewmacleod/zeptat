@@ -37,8 +37,8 @@ task :upload do
   puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
 end
 
-# upload files in file named "files_to_upload" to database
-# rake query_mongo
+# search for query term based on titles in "files_to_upload" to database
+# rake query
 task :query do
   puts "Searching files in Zeptat Mongo database..."
   start = Time.now
@@ -50,8 +50,8 @@ task :query do
   puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
 end
 
-# upload files in file named "files_to_upload" to database
-# rake query_mongo
+# count query hits based on titles named "files_to_upload" in zeptat database
+# rake query_count
 task :query_count do
   puts "Searching files in Zeptat Mongo database..."
   start = Time.now
@@ -64,13 +64,27 @@ task :query_count do
 end
 
 
-# upload files in file named "files_to_upload" to database
+# query a specific file in  "files_to_upload" in zeptat database
 # rake query_title name='title'
 task :query_title do
   puts "Searching title in Zeptat Mongo database..."
   title = ENV['name']
   start = Time.now
   output = `python3 lib/mongo_zeptat.py query_title #{title}`
+  finish = Time.now
+  diff = finish - start
+  dm = diff.divmod(60)
+  puts output
+  puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
+end
+
+
+# return all lines
+# rake query_lines
+task :query_lines do
+  puts "Searching titles in Zeptat Mongo database..."
+  start = Time.now
+  output = `python3 lib/mongo_zeptat.py query_lines`
   finish = Time.now
   diff = finish - start
   dm = diff.divmod(60)

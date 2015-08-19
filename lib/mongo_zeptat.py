@@ -78,6 +78,15 @@ class Mongo_Zeptat(object):
                 if search_term in line[1]:
                         print("Title: ", full_name[:25]+"...", " *** ", line[0], "  ", line[1])
 
+    def query_lines(self):
+        """ returns all lines from all titles """
+        with open('files_to_upload') as f:
+            for text in f:
+                print("searching text: ", text.rstrip())
+                for edoc in self.coll.find({"title": text.rstrip() }):
+                    elines = edoc["lines"]
+                    for line in elines:
+                        print("Title: ", text.rstrip()[:25]+"...", " *** ", line[0], "  ", line[1])
 
 
     def print_titles(self):
@@ -114,6 +123,9 @@ if __name__ == '__main__':
         with open('query_list') as ql:
             for q in ql:
                 zeptat.query_title(sys.argv[2], q.rstrip())
+
+    if sys.argv[1] == 'query_lines':
+        zeptat.query_lines()
 
     if sys.argv[1] == 'drop':
         zeptat.drop_collection()
