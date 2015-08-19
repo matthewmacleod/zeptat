@@ -121,6 +121,10 @@ abridged example output:
 
       Title: Emerging Paradigms in Machine Learning         *** Number of line matches: 152.0
 
+to get the results from a specific file, do this eg,
+
+     rake query_title name='20-ml-tools.txt'
+
 
 To clean database
 ------------------------

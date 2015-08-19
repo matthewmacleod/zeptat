@@ -60,6 +60,16 @@ class Mongo_Zeptat(object):
                         print("Title: ", text.rstrip()[:25]+"..." , " *** Number of line matches: ",  counts)
 
 
+    def query_title(self, name, search_term):
+        print("Searching Mongo database for file " + name + " and search term: " + search_term)
+        for edoc in self.coll.find({"title": name }):
+            elines = edoc["lines"]
+            for line in elines:
+                if search_term in line[1]:
+                    print("Title: ", name[:25]+"...", " *** ", line[0], "  ", line[1])
+
+
+
     def print_titles(self):
         for doc in self.coll.find():
             print(doc)
@@ -89,6 +99,11 @@ if __name__ == '__main__':
         with open('query_list') as ql:
             for q in ql:
                 zeptat.query_count(q.rstrip())
+
+    if sys.argv[1] == 'query_title':
+        with open('query_list') as ql:
+            for q in ql:
+                zeptat.query_title(sys.argv[2], q.rstrip())
 
     if sys.argv[1] == 'drop':
         zeptat.drop_collection()
