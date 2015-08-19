@@ -125,6 +125,8 @@ to get the results from a specific file, do this eg,
 
      rake query_title name='20-ml-tools.txt'
 
+note the full name does not need to be given, only enough of the name to make it unique with respect to other titles in database
+
 
 To clean database
 ------------------------

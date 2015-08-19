@@ -62,11 +62,21 @@ class Mongo_Zeptat(object):
 
     def query_title(self, name, search_term):
         print("Searching Mongo database for file " + name + " and search term: " + search_term)
-        for edoc in self.coll.find({"title": name }):
+        # find full name if abridged title is given
+        full_name = None
+        with open('files_to_upload') as f:
+            for text in f:
+                if name in text.rstrip():
+                    if full_name == None:
+                        full_name=text.rstrip()
+                    else:
+                        sys.exit("Error..conflict with file name, as matched more than one file, try adding characters to title")
+
+        for edoc in self.coll.find({"title": full_name }):
             elines = edoc["lines"]
             for line in elines:
                 if search_term in line[1]:
-                    print("Title: ", name[:25]+"...", " *** ", line[0], "  ", line[1])
+                        print("Title: ", full_name[:25]+"...", " *** ", line[0], "  ", line[1])
 
 
 
