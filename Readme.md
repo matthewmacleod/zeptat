@@ -4,12 +4,14 @@ Zeptat (Czech for: to ask)
 Project goals and notes
 ------------------------
 
- * primary goal: to find text in parsed e-books via database
- * secondary goal: test various databases:
+ * primary goal: find text in parsed e-books via database
+ * secondary goal: test various databases, eg:
     * MongoDB
     * Cassandra
     * PostgreSQL
-
+ * tertiary goal: test some big data tools, eg:
+    * hadoop
+    * spark
 
 Third-party tools required to run Zeptat code:
 
@@ -125,7 +127,7 @@ to get the results from a specific file, do this eg,
 
      rake query_title name='20-ml-tools.txt'
 
-note the full name does not need to be given, only enough of the name to make it unique with respect to other titles in database
+Note: the full name does **not** need to be given, only enough of the name to make it unique with respect to other titles in database
 
 
 To clean database
@@ -167,6 +169,6 @@ rdoc -f darkfish
 Todo
 ------------------------
 * add additional mongo query flexibility
-
+* add big data tools
 
 
