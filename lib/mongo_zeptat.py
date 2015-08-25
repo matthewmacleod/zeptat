@@ -29,7 +29,8 @@ class Mongo_Zeptat(object):
                 with open('texts/'+text.rstrip()) as t:
                     lines = []
                     for index, text_line in enumerate(t):
-                        lines.append((index,text_line.rstrip()))
+                        # note that all lines will be added in lower case
+                        lines.append((index,text_line.rstrip().lower()))
                     doc = { "title": text.rstrip(),
                             "lines": lines,
                             "date": datetime.datetime.utcnow()}

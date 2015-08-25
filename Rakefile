@@ -92,6 +92,19 @@ task :query_lines do
   puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
 end
 
+# to remove ebook database
+# rake drop
+task :drop do
+  puts "Removing Zeptat Mongo database..."
+  start = Time.now
+  output = `python3 lib/mongo_zeptat.py drop`
+  finish = Time.now
+  diff = finish - start
+  dm = diff.divmod(60)
+  puts output
+  puts "Finished, run time: " + dm[0].to_s + " minutes " + dm[1].round(1).to_s + " seconds."
+end
+
 
 
 
