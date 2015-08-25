@@ -2,7 +2,7 @@
 
 require 'docsplit'
 
-file_dest = '../texts'
+file_dest = 'texts'
 
 # parse functionality
 # usage:

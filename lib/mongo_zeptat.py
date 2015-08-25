@@ -2,6 +2,7 @@ import sys
 import datetime
 import pymongo
 from pymongo import MongoClient
+import operator
 
 
 class Mongo_Zeptat(object):
@@ -48,6 +49,7 @@ class Mongo_Zeptat(object):
 
     def query_count(self, search_term):
         print("Searching Mongo database for " + search_term)
+        count_dict = {}
         with open('files_to_upload') as f:
             for text in f:
                 counts = 0
@@ -57,7 +59,10 @@ class Mongo_Zeptat(object):
                         if search_term in line[1]:
                             counts += 1
                 if counts > 0:
-                        print("Title: ", text.rstrip()[:25]+"..." , " *** Number of line matches: ",  counts)
+                       count_dict[text.rstrip()] = counts
+        sorted_counts = sorted(count_dict.items(), key=lambda x: x[1])
+        for i, line in enumerate(sorted_counts):
+            print("{0:<8}  line matches in Title: {1}".format(sorted_counts[i][1],sorted_counts[i][0]))
 
 
     def query_title(self, name, search_term):
