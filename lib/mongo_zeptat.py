@@ -37,13 +37,15 @@ class Mongo_Zeptat(object):
 
     def query(self, search_term):
         print("Searching Mongo database for " + search_term)
+        search_list = search_term.split()
+        search_terms = list(filter(lambda x: x != 'OR', search_list))
         with open('files_to_upload') as f:
             for text in f:
                 print("searching text: ", text.rstrip())
                 for edoc in self.coll.find({"title": text.rstrip() }):
                     elines = edoc["lines"]
                     for line in elines:
-                        if search_term in line[1]:
+                        if any(x in line[1].split() for x in search_terms): # any will return true as soon as find a term
                             print("Title: ", text.rstrip()[:25]+"...", " *** ", line[0], "  ", line[1])
 
 

@@ -128,6 +128,10 @@ now type:
 
       rake query_count
 
+also work s with OR in query_list
+
+    linear OR Linear OR LINEAR
+
 abridged example output:
 
 
