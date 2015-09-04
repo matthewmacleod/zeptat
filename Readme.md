@@ -37,6 +37,11 @@ To run Zeptat with MongoDB
 To Parse:
 Step 1.  put file paths of pdfs into file input,
 
+make a list of files to upload, eg
+
+             find /home/matej/ebooks/programming/cs/ai/machine_learning/ -name "*pdf" | grep pdf > input
+
+or can make list from files in different locations:
 
              cat input
 
@@ -56,7 +61,12 @@ or in long form:
 
 To upload:
 Step 3. load files into database:
-fix file for uploads, files_to_upload
+
+to generate list of files that we parsed,
+
+        ls texts > files_to_upload
+
+Or make file for uploads, files_to_upload
 
 eg,
 

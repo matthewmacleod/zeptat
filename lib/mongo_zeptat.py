@@ -30,7 +30,8 @@ class Mongo_Zeptat(object):
                     lines = []
                     for index, text_line in enumerate(t):
                         # note that all lines will be added in lower case
-                        lines.append((index,text_line.rstrip().lower()))
+                        #lines.append((index,text_line.rstrip().lower()))
+                        lines.append((index,text_line.rstrip()))
                     doc = { "title": text.rstrip(),
                             "lines": lines,
                             "date": datetime.datetime.utcnow()}
@@ -45,7 +46,7 @@ class Mongo_Zeptat(object):
                     elines = edoc["lines"]
                     for line in elines:
                         if search_term in line[1]:
-                                print("Title: ", text.rstrip()[:25]+"...", " *** ", line[0], "  ", line[1])
+                            print("Title: ", text.rstrip()[:25]+"...", " *** ", line[0], "  ", line[1])
 
 
     def query_count(self, search_term):
@@ -63,7 +64,7 @@ class Mongo_Zeptat(object):
                        count_dict[text.rstrip()] = counts
         sorted_counts = sorted(count_dict.items(), key=lambda x: x[1])
         for i, line in enumerate(sorted_counts):
-            print("{0:<8}  line matches in Title: {1}".format(sorted_counts[i][1],sorted_counts[i][0]))
+            print("{0:<8} {1} line matches in Title: {2}".format(sorted_counts[i][1], search_term, sorted_counts[i][0]))
 
 
     def query_title(self, name, search_term):
@@ -82,7 +83,8 @@ class Mongo_Zeptat(object):
             elines = edoc["lines"]
             for line in elines:
                 if search_term in line[1]:
-                        print("Title: ", full_name[:25]+"...", " *** ", line[0], "  ", line[1])
+                        #print("Title: ", full_name[:25]+"...", " *** ", line[0], "  ", line[1])
+                        print(line[0], "  ", line[1])
 
     def query_lines(self):
         """ returns all lines from all titles """
