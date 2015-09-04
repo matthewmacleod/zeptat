@@ -90,6 +90,10 @@ As of now database queries are *not* case sensitive, eg:
 
     linear
 
+note can also search other terms with 'OR' keyword, eg:
+
+    linear OR Linear OR LINEAR
+
 now type:
 
     rake query

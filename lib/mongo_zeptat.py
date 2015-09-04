@@ -29,8 +29,6 @@ class Mongo_Zeptat(object):
                 with open('texts/'+text.rstrip()) as t:
                     lines = []
                     for index, text_line in enumerate(t):
-                        # note that all lines will be added in lower case
-                        #lines.append((index,text_line.rstrip().lower()))
                         lines.append((index,text_line.rstrip()))
                     doc = { "title": text.rstrip(),
                             "lines": lines,
@@ -51,6 +49,8 @@ class Mongo_Zeptat(object):
 
     def query_count(self, search_term):
         print("Searching Mongo database for " + search_term)
+        search_list = search_term.split()
+        search_terms = list(filter(lambda x: x != 'OR', search_list))
         count_dict = {}
         with open('files_to_upload') as f:
             for text in f:
@@ -58,8 +58,8 @@ class Mongo_Zeptat(object):
                 for edoc in self.coll.find({"title": text.rstrip() }):
                     elines = edoc["lines"]
                     for line in elines:
-                        if search_term in line[1]:
-                            counts += 1
+                        line_counts = [line[1].count(x) for x in search_terms]
+                        counts += sum(line_counts)
                 if counts > 0:
                        count_dict[text.rstrip()] = counts
         sorted_counts = sorted(count_dict.items(), key=lambda x: x[1])
